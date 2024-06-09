@@ -1,0 +1,27 @@
+name: Push to master
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Make changes
+      run: |
+        # Add commands to make changes to the repository
+        echo "Making some changes" > file.txt
+        git add file.txt
+        git commit -m "Made some changes"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT_TOKEN }}
+        branch: master
